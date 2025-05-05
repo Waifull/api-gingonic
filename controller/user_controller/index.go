@@ -18,11 +18,7 @@ func GetAllUser(ctx *gin.Context) {
 		})
 		return
 	}
-	// isValidated := true
-	// 	if !isValidated {
-		
-		// 		return
-		// }
+	
 		ctx.JSON(200, gin.H{
 			"data": users,
 		})
