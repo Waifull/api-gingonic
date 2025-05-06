@@ -26,6 +26,23 @@ func GetAllUser(ctx *gin.Context) {
 
 func GetById(ctx *gin.Context){
 
+	id := ctx.Param("id")
+	user := new(model.User)
+
+	errDb := database.DB.Table("users").Where("id = ?", id).First(&user).Error
+	if errDb != nil || user.ID == nil{
+		ctx.JSON(404, gin.H{
+			"message": "data not found.",
+		})
+		
+		return
+	}
+
+	ctx.JSON(200, gin.H{
+		"message": "data transmitted.",
+		"data": user,
+
+	})
 }
 
 func Store(ctx *gin.Context){
