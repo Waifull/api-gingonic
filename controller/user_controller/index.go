@@ -23,3 +23,19 @@ func GetAllUser(ctx *gin.Context) {
 			"data": users,
 		})
 }
+
+func GetById(ctx *gin.Context){
+
+}
+
+func Store(ctx *gin.Context){
+	
+}
+
+func Update(ctx *gin.Context){
+	
+}
+
+func Delete(ctx *gin.Context){
+	
+}
