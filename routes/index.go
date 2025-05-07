@@ -14,7 +14,7 @@ func InitRoute(app *gin.Engine) {
 	//user
 	route.GET("/user", user_controller.GetAllUser)
 	route.GET("/user/:id", user_controller.GetById)
-	
+	route.POST("/user", user_controller.Store)
 
 
 	//book
