@@ -5,6 +5,7 @@ import (
 	"gin-gonic-gorm/model"
 	"gin-gonic-gorm/requests"
 	"gin-gonic-gorm/responses"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -204,5 +205,39 @@ func Delete(ctx *gin.Context){
 
 	ctx.JSON(200, gin.H{
 		"message": "data deleted successfully.",
+	})
+}
+
+func GetUserPaginate(ctx *gin.Context){
+	
+	page := ctx.Query("page")
+	if page == ""{
+		page = "1"
+	}
+
+	perPage := ctx.Query("perPage")
+	if perPage == ""{
+		perPage = "10"
+	}
+
+	perPageInt, _ := strconv.Atoi(perPage)
+	pageInt, _ := strconv.Atoi(page)
+	if pageInt < 1 {
+		pageInt = 1
+	}
+
+	users := new([]model.User)
+	err := database.DB.Table("users").Offset((pageInt - 1) * perPageInt).Limit(perPageInt).Find(&users).Error
+	if err != nil{
+		ctx.AbortWithStatusJSON(500, gin.H{
+			"message": "Internal Server Error.",
+		})
+		return
+	}
+
+	ctx.JSON(200, gin.H{
+		"data": users,
+		"page": pageInt,
+		"per_page": perPageInt,
 	})
 }
