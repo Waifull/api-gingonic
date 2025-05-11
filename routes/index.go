@@ -3,32 +3,29 @@ package routes
 import (
 	"gin-gonic-gorm/config/app_config"
 	"gin-gonic-gorm/controller/book_controller"
-	"gin-gonic-gorm/controller/file_controller"
 	"gin-gonic-gorm/controller/user_controller"
-	"gin-gonic-gorm/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 func InitRoute(app *gin.Engine) {
 
-	route := app
+	route := app.Group("api")
+
 	route.Static(app_config.STATIC_ROUTE, app_config.STATIC_DIR)
 
 	//user
-	route.GET("/user", user_controller.GetAllUser)
-	route.GET("/user/paginate", user_controller.GetUserPaginate)
-	route.GET("/user/:id", user_controller.GetById)
-	route.POST("/user", user_controller.Store)
-	route.PATCH("/user/:id", user_controller.Update)
-	route.DELETE("/user/:id", user_controller.Delete)
+	userRoute := route.Group("user")
+	userRoute.GET("/", user_controller.GetAllUser)
+	userRoute.GET("/paginate", user_controller.GetUserPaginate)
+	userRoute.GET("/:id", user_controller.GetById)
+	userRoute.POST("/", user_controller.Store)
+	userRoute.PATCH("/:id", user_controller.Update)
+	userRoute.DELETE("/:id", user_controller.Delete)
 
 
 	//book
 	route.GET("/book", book_controller.GetAllBook)
 
-	//file
-	route.POST("/file", file_controller.HandlerUploadFile)
-	//delete + middleware
-	route.DELETE("/file/:filename", middleware.AuthMiddleware, file_controller.HandleRemoveFile)
+	v1Route(route)
 }
