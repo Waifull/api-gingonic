@@ -28,4 +28,5 @@ func InitRoute(app *gin.Engine) {
 
 	//file
 	route.POST("/file", file_controller.HandlerUploadFile)
+	route.DELETE("/file/:filename", file_controller.HandleRemoveFile)
 }
