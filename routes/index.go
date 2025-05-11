@@ -5,6 +5,7 @@ import (
 	"gin-gonic-gorm/controller/book_controller"
 	"gin-gonic-gorm/controller/file_controller"
 	"gin-gonic-gorm/controller/user_controller"
+	"gin-gonic-gorm/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,5 +29,6 @@ func InitRoute(app *gin.Engine) {
 
 	//file
 	route.POST("/file", file_controller.HandlerUploadFile)
-	route.DELETE("/file/:filename", file_controller.HandleRemoveFile)
+	//delete + middleware
+	route.DELETE("/file/:filename", middleware.AuthMiddleware, file_controller.HandleRemoveFile)
 }
