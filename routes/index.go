@@ -2,6 +2,7 @@ package routes
 
 import (
 	"gin-gonic-gorm/config/app_config"
+	"gin-gonic-gorm/controller/auth_controller"
 	"gin-gonic-gorm/controller/book_controller"
 	"gin-gonic-gorm/controller/user_controller"
 
@@ -13,6 +14,9 @@ func InitRoute(app *gin.Engine) {
 	route := app.Group("api")
 
 	route.Static(app_config.STATIC_ROUTE, app_config.STATIC_DIR)
+
+	// auth 
+	route.POST("/login", auth_controller.Login)
 
 	//user
 	userRoute := route.Group("user")
