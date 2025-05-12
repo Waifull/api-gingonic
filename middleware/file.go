@@ -1,26 +1,13 @@
-package file_controller
+package middleware
 
 import (
-	"gin-gonic-gorm/constanta"
 	"gin-gonic-gorm/utils"
-	"net/http"
 	"path/filepath"
 
 	"github.com/gin-gonic/gin"
-	
 )
 
-func SendStatus(ctx *gin.Context){
-
-	filename := ctx.MustGet("filename").(string)
-
-	ctx.JSON(200, gin.H{
-		"message": "file uploaded.",
-		"file_name": filename,
-	})
-}
-
-func HandlerUploadFile(ctx *gin.Context){
+func UploadFile(ctx *gin.Context) {
 
 	fileHeader, _ := ctx.FormFile("file")
 	if fileHeader == nil {
@@ -60,30 +47,7 @@ func HandlerUploadFile(ctx *gin.Context){
 		})
 		return
 	}
-	
-	ctx.JSON(200, gin.H{
-		"message": "file uploaded.",
-	})
-}
 
-func HandleRemoveFile(ctx *gin.Context) {
-
-	filename := ctx.Param("filename")
-
-	if filename == "" {
-		ctx.JSON(400, gin.H{
-			"message": "file name is required",
-		})
-	}
-	err := utils.RemoveFile(constanta.DIR_FILE + filename)
-
-	if err != nil {
-		ctx.JSON(500, gin.H{
-			"message": err.Error(),
-		})
-		return
-	}
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": "file deleted successfully.",
-	})
+	ctx.Set("filename", filename)
+	ctx.Next()
 }

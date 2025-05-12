@@ -15,6 +15,7 @@ func v1Route(app *gin.RouterGroup){
 	//middleware auth route group
 	authRoute := route.Group("file", middleware.AuthMiddleware)
 	authRoute.POST("/", file_controller.HandlerUploadFile)
+	authRoute.POST("/middleware", middleware.UploadFile, file_controller.SendStatus)
 	authRoute.DELETE("/:filename", file_controller.HandleRemoveFile)
 	// //contoh middleware untuk 1 route
 	// //delete + middleware
