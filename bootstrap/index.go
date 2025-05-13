@@ -3,6 +3,7 @@ package bootstrap
 import (
 	"gin-gonic-gorm/config"
 	"gin-gonic-gorm/config/app_config"
+	"gin-gonic-gorm/config/cors_config"
 	"gin-gonic-gorm/database"
 	"gin-gonic-gorm/routes"
 	"log"
@@ -26,6 +27,10 @@ func BootstrapApp() {
 
 	//INIT GIN ENGINE
 	app := gin.Default()
+
+	//CORS
+	app.Use(cors_config.CorsConfigContrib())
+	// app.Use(cors_config.CorsConfig)
 
 	//INIT ROUTES
 	routes.InitRoute(app)
