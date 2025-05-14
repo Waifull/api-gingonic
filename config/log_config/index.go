@@ -52,8 +52,12 @@ func openOrCreateLogFile(path string) (*os.File, error) {
 	return logFile, nil
 }
 
-func DefaultLogging(){
+func DefaultLogging(path ...string){
 	gin.DisableConsoleColor()
+
+	if len(path) > 0 && path[0] != "" {
+		defaultLogFilePath = path[0]
+	}
 
 	createLogFolderIfNotExist(defaultLogFilePath)
 	f, _ := openOrCreateLogFile(defaultLogFilePath)
