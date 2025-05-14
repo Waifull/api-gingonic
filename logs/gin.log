@@ -1,0 +1,28 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /api/public/*filepath     --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] HEAD   /api/public/*filepath     --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (4 handlers)
+[GIN-debug] POST   /api/login                --> gin-gonic-gorm/controller/auth_controller.Login (4 handlers)
+[GIN-debug] GET    /api/user/                --> gin-gonic-gorm/controller/user_controller.GetAllUser (4 handlers)
+[GIN-debug] GET    /api/user/paginate        --> gin-gonic-gorm/controller/user_controller.GetUserPaginate (4 handlers)
+[GIN-debug] GET    /api/user/:id             --> gin-gonic-gorm/controller/user_controller.GetById (4 handlers)
+[GIN-debug] POST   /api/user/                --> gin-gonic-gorm/controller/user_controller.Store (4 handlers)
+[GIN-debug] PATCH  /api/user/:id             --> gin-gonic-gorm/controller/user_controller.Update (4 handlers)
+[GIN-debug] DELETE /api/user/:id             --> gin-gonic-gorm/controller/user_controller.Delete (4 handlers)
+[GIN-debug] GET    /api/book                 --> gin-gonic-gorm/controller/book_controller.GetAllBook (4 handlers)
+[GIN-debug] POST   /api/file/                --> gin-gonic-gorm/controller/file_controller.HandlerUploadFile (5 handlers)
+[GIN-debug] POST   /api/file/middleware      --> gin-gonic-gorm/controller/file_controller.SendStatus (6 handlers)
+[GIN-debug] DELETE /api/file/:filename       --> gin-gonic-gorm/controller/file_controller.HandleRemoveFile (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2025/05/14 - 22:58:32 | 404 |            0s |             ::1 | GET      "/user"
+[GIN] 2025/05/14 - 22:58:35 | 404 |            0s |             ::1 | GET      "/user/"
+[GIN] 2025/05/14 - 22:58:35 | 404 |            0s |             ::1 | GET      "/favicon.ico"
+[GIN] 2025/05/14 - 22:58:41 | 200 |      22.857ms |             ::1 | GET      "/api/user/"
+[GIN] 2025/05/14 - 22:58:56 | 404 |            0s |             ::1 | GET      "/api/file/"
+[GIN] 2025/05/14 - 22:59:03 | 200 |      7.5279ms |             ::1 | GET      "/api/user/1"

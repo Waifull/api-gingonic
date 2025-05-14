@@ -4,6 +4,7 @@ import (
 	"gin-gonic-gorm/config"
 	"gin-gonic-gorm/config/app_config"
 	"gin-gonic-gorm/config/cors_config"
+	"gin-gonic-gorm/config/log_config"
 	"gin-gonic-gorm/database"
 	"gin-gonic-gorm/routes"
 	"log"
@@ -24,6 +25,9 @@ func BootstrapApp() {
 
 	//DATABASE CONNECTION
 	database.ConnectDatabase()
+
+	//Log
+	log_config.DefaultLogging()
 
 	//INIT GIN ENGINE
 	app := gin.Default()
