@@ -23,22 +23,22 @@ func BootstrapApp() {
 	// INIT config
 	config.InitConfig()
 
-	//DATABASE CONNECTION
+	// DATABASE CONNECTION
 	database.ConnectDatabase()
 
 	// Log
 	log_config.DefaultLogging()
 
-	//INIT GIN ENGINE
+	// INIT GIN ENGINE
 	app := gin.Default()
 
-	//CORS
+	// CORS
 	app.Use(cors_config.CorsConfigContrib())
 	// app.Use(cors_config.CorsConfig)
 
-	//INIT ROUTES
+	// INIT ROUTES
 	routes.InitRoute(app)
 
-	//RUN APP
+	// RUN APP
 	app.Run(app_config.PORT)
 }
