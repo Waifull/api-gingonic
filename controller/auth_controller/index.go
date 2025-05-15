@@ -33,7 +33,7 @@ func Login(ctx *gin.Context){
 
 	// check password
 	if loginReq.Password != "12345" {
-		ctx.AbortWithStatusJSON(401, gin.H{
+		ctx.AbortWithStatusJSON(400, gin.H{
 			"message": "credential not valid.",
 		})
 		return
