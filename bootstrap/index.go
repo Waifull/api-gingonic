@@ -14,19 +14,19 @@ import (
 )
 
 func BootstrapApp() {
-	//Load .env FILE
+	// Load .env FILE
 	err := godotenv.Load()
 	if err != nil {
 		log.Println("Error loading .env file")
 	}
 
-	//INIT config
+	// INIT config
 	config.InitConfig()
 
 	//DATABASE CONNECTION
 	database.ConnectDatabase()
 
-	//Log
+	// Log
 	log_config.DefaultLogging()
 
 	//INIT GIN ENGINE
