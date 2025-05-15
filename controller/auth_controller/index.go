@@ -25,7 +25,7 @@ func Login(ctx *gin.Context){
 	user := new(model.User)
 	errUser := database.DB.Table("users").Where("email = ?", loginReq.Email).Find(&user).Error
 	if errUser != nil {
-		ctx.AbortWithStatusJSON(404, gin.H{
+		ctx.AbortWithStatusJSON(400, gin.H{
 			"message": "credential not valid.",
 		})
 		return
